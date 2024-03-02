@@ -1,10 +1,15 @@
-﻿namespace Movie.Console
+﻿using Movie.Data;
+
+namespace Movie.Console
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            MovieContext db = new MovieContext();
+            db.Database.EnsureCreated();
+            
+            
         }
     }
 }
