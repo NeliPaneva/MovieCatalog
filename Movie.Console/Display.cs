@@ -70,7 +70,7 @@ namespace Movie.Console
                         CreateMovie();
                         break;
                     case 7:
-                        ListAllMovies();
+                        ListAllMoviesByViewModel();
                         break;
                     default:
                         break;
@@ -184,6 +184,20 @@ namespace Movie.Console
             foreach (var item in movieAll)
             {
                 Console.WriteLine(item);
+            }
+
+
+        }
+        private void ListAllMoviesByViewModel()
+        {
+
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(new string(' ', 16) + "Movies" + new string(' ', 16));
+            Console.WriteLine(new string('-', 40));
+            var movieAll = movieService.GetAllMovies();
+            foreach (var item in movieAll)
+            {
+                Console.WriteLine($"{item.Name} --- {item.Duration}  --- {item.DiraectorName}  --- {item.CompanyName}");
             }
 
 

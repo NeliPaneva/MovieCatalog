@@ -3,6 +3,7 @@ namespace Movie.Services
 {
     using Movie.Data;
     using Movie.Models;
+    using Movie.Services.ViewModels;
     using System.Collections.Generic;
 
     public class MovieService : IMovieService
@@ -43,17 +44,39 @@ namespace Movie.Services
             this.db.Movies.Add(movie);
             this.db.SaveChanges();
         }
-
+        //All movies not use viewModel
         public ICollection<string> GetAll()
         {
-            var movies=db.Movies.ToList();
-            var allMovies=new List<string>();
+            var movies = db.Movies.ToList();
+            var allMovies = new List<string>();
             foreach (var movie in movies)
             {
-                string d = db.Directors.FirstOrDefault(x=>x.Id==movie.DirectorId).Name;
-                string c = db.Companies.FirstOrDefault(x=>x.Id==movie.CompanyId).Name;
+                string d = db.Directors.FirstOrDefault(x => x.Id == movie.DirectorId).Name;
+                string c = db.Companies.FirstOrDefault(x => x.Id == movie.CompanyId).Name;
                 string t = movie.CreatedOn.ToString();
-                string m =$"{movie.Name}    {movie.Duration}    {t}    {d}    {c}";
+                string m = $"{movie.Name}    {movie.Duration}    {t}    {d}    {c}";
+                allMovies.Add(m);
+            }
+            return allMovies;
+        }
+        //All movies  use viewModel
+        public ICollection<MovieViewModel> GetAllMovies()
+        {
+            var movies = db.Movies.ToList();
+            var allMovies = new List<MovieViewModel>();
+            foreach (var movie in movies)
+            {
+                string d = db.Directors.FirstOrDefault(x => x.Id == movie.DirectorId).Name;
+                string c = db.Companies.FirstOrDefault(x => x.Id == movie.CompanyId).Name;
+                string t = movie.CreatedOn.Value.Year.ToString();
+                MovieViewModel m = new MovieViewModel
+                {
+                    Name = movie.Name,
+                    Duration = movie.Duration,
+                    CreatedOn = t,
+                    DiraectorName = d,
+                    CompanyName = c
+                };
                 allMovies.Add(m);
             }
             return allMovies;
