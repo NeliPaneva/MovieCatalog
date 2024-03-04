@@ -13,8 +13,9 @@ namespace Movie.Console
     
     public class Display
     {
-        private int closeOperationId = 6;
+        private int closeOperationId = 8;
         private readonly CompanyService compService;
+        private readonly MovieService movieService;
         private readonly MovieContext db;
 
         public Display()
@@ -22,6 +23,7 @@ namespace Movie.Console
             this.db = new MovieContext();
             db.Database.EnsureCreated();
             this.compService = new CompanyService(db);
+            this.movieService=new MovieService(db);
             Input();
         }
 
@@ -35,7 +37,9 @@ namespace Movie.Console
             Console.WriteLine("3. Update company");
             Console.WriteLine("4. Fetch company by ID");
             Console.WriteLine("5. Delete company by name");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. Create movie");
+            Console.WriteLine("7. List all movies");
+            Console.WriteLine("8. Exit");
         }
 
         private void Input()
@@ -48,7 +52,7 @@ namespace Movie.Console
                 switch (operation)
                 {
                     case 1:
-                        ListAll();
+                        ListAllCompanies();
                         break;
                     case 2:
                         Add();
@@ -61,6 +65,12 @@ namespace Movie.Console
                         break;
                     case 5:
                         Delete();
+                        break;
+                    case 6:
+                        CreateMovie();
+                        break;
+                    case 7:
+                        ListAllMovies();
                         break;
                     default:
                         break;
@@ -122,14 +132,7 @@ namespace Movie.Console
 
         private void Add()
         {
-            //Product product = new Product();
-            //Console.WriteLine("Enter name: ");
-            //product.Name = Console.ReadLine();
-            //Console.WriteLine("Enter price: ");
-            //product.Price = decimal.Parse(Console.ReadLine());
-            //Console.WriteLine("Enter availability: ");
-            //product.Stock = int.Parse(Console.ReadLine());
-            //productBusiness.Add(product);
+            
          
             Console.WriteLine("Enter company name: ");
             string compName = Console.ReadLine();
@@ -137,7 +140,7 @@ namespace Movie.Console
             // db.Add(product);
         }
 
-        private void ListAll()
+        private void ListAllCompanies()
         {
             //Console.WriteLine(new string('-', 40));
             //Console.WriteLine(new string(' ', 16) + "PRODUCTS" + new string(' ', 16));
@@ -158,5 +161,32 @@ namespace Movie.Console
 
 
         }
-}
+        private void CreateMovie()
+        {
+           
+            Console.WriteLine("Enter movie name: ");
+            string Name = Console.ReadLine();
+            Console.WriteLine("Enter duration: ");
+            int duration = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter company name: ");
+            string cName = Console.ReadLine();
+            Console.WriteLine("Enter director name: ");
+            string dName = Console.ReadLine();
+            movieService.Create(Name,duration,cName,dName);
+        }
+        private void ListAllMovies()
+        {
+           
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(new string(' ', 16) + "Movies" + new string(' ', 16));
+            Console.WriteLine(new string('-', 40));
+            var movieAll = movieService.GetAll();
+            foreach (var item in movieAll)
+            {
+                Console.WriteLine(item);
+            }
+
+
+        }
+    }
 }
