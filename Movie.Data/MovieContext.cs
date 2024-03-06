@@ -53,10 +53,10 @@ namespace Movie.Data
             modelBuilder.Entity<Movie>().HasData(
                 new Movie { Id = 1, DirectorId = 1, Name = "Avatar", Duration = 130, CompanyId = 4, CreatedOn = new DateTime(2003, 12, 10) },
                 new Movie { Id = 2, DirectorId = 2, Name = "E.T.", Duration = 150, CompanyId = 5, CreatedOn = new DateTime(1982, 3, 3) },
-                new Movie { Id = 6, DirectorId = 2, Name = "War of the worlds", Duration = 1450, CompanyId = 1, CreatedOn = new DateTime(2013, 11, 3) },
                 new Movie { Id = 3, DirectorId = 1, Name = "Interstaller", Duration = 211, CompanyId = 1, CreatedOn = new DateTime(2003, 7, 22) },
                 new Movie { Id = 4, DirectorId = 3, Name = "StarWors", Duration = 113, CompanyId = 4, CreatedOn = new DateTime(2013, 1, 12) },
-                new Movie { Id = 5, DirectorId = 1, Name = "Zoro", Duration = 120, CompanyId = 3, CreatedOn = new DateTime(2023, 10, 12) });
+                new Movie { Id = 5, DirectorId = 1, Name = "Zoro", Duration = 120, CompanyId = 3, CreatedOn = new DateTime(2023, 10, 12) }, 
+                new Movie { Id = 6, DirectorId = 2, Name = "War of the worlds", Duration = 1450, CompanyId = 1, CreatedOn = new DateTime(2013, 11, 3) });
         }
     }
 }

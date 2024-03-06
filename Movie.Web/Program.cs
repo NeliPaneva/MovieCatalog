@@ -1,3 +1,6 @@
+using Movie.Data;
+using Movie.Services;
+
 namespace Movie.Web
 {
     public class Program
@@ -8,6 +11,10 @@ namespace Movie.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+          
+            builder.Services.AddDbContext<MovieContext>();
+            builder.Services.AddTransient<ICompanyService, CompanyService>();
+            builder.Services.AddTransient<IMovieService, MovieService>();
 
             var app = builder.Build();
 
