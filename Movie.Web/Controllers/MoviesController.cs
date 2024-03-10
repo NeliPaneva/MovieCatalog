@@ -28,6 +28,54 @@ using Movie.Models;
             return View(await movieContext.ToListAsync());
         }
 
+        //Thes Action Sort by Name or Date
+        public async Task<IActionResult> IndexMovieSort(string sortOrder,string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var movies = from s in _context.Movies.Include(m => m.Company).Include(m => m.Director)
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.Name.Contains(searchString));
+                                      // || s.FirstMidName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    movies = movies.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    movies = movies.OrderBy(s => s.CreatedOn);
+                    break;
+                case "date_desc":
+                    movies = movies.OrderByDescending(s => s.CreatedOn);
+                    break;
+                default:
+                    movies = movies.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Movie>.CreateAsync(movies.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await movies.AsNoTracking().ToListAsync());
+        }
+
+
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
