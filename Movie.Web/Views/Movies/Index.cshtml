@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                @Html.DisplayFor(modelItem => item.CreatedOn.Value.Date.Year)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Company.Name)
