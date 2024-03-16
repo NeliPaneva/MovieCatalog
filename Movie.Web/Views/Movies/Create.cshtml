@@ -14,26 +14,26 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Име</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
+                <label asp-for="Duration" class="control-label">Продължителност</label>
                 <input asp-for="Duration" class="form-control" />
                 <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
+                <label asp-for="CreatedOn" class="control-label">Създаден на</label>
                 <input asp-for="CreatedOn" class="form-control" />
                 <span asp-validation-for="CreatedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompanyId" class="control-label"></label>
+                <label asp-for="Company" class="control-label">Компания</label>
                 <select asp-for="CompanyId" class ="form-control" asp-items="ViewBag.CompanyId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="DirectorId" class="control-label"></label>
+                <label asp-for="Director" class="control-label">Режисьор</label>
                 <select asp-for="DirectorId" class ="form-control" asp-items="ViewBag.DirectorId"></select>
             </div>
             <div class="form-group">

@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Movie.Services
-{
+{/// <summary>
+/// class for servise metods for company
+/// needs from field MovieContext to acsses database
+/// </summary>
     public class CompanyService : ICompanyService
     {
         private readonly MovieContext db;
